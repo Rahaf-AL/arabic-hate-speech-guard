@@ -1,0 +1,11 @@
+datasets
+pandas
+numpy
+scikit-learn
+transformers
+torch
+pyarabic
+optimum[onnxruntime]
+gradio
+python-dotenv
+pytest
