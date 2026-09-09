@@ -9,3 +9,7 @@ optimum[onnxruntime]
 gradio
 python-dotenv
 pytest
+matplotlib
+peft
+optuna
+wandb
