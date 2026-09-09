@@ -3,5 +3,7 @@ __pycache__/
 *.pyc
 data/raw/
 data/processed/
-model/
+data/splits/
+models/
 .env
+
