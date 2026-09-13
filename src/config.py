@@ -1,6 +1,7 @@
 """
 Central configuration for the Arabic Hate Speech Detection project.
 
+
 """
 from pathlib import Path
 
@@ -29,6 +30,7 @@ TEST_PATH = SPLITS_DIR / "test.csv"
 # Reports and documentation artifacts
 REPORTS_DIR = PROJECT_ROOT / "reports"
 EDA_REPORT_DIR = REPORTS_DIR / "eda"
+EVAL_REPORT_DIR = REPORTS_DIR / "evaluation"
 DATASET_CARD_PATH = DATA_DIR / "DATASET_CARD.md"
 
 # Label schema
@@ -42,8 +44,8 @@ LHSAB_LABEL_MAP = {"hate": 1, "abusive": 1, "normal": 0}
 MODEL_NAME = "UBC-NLP/MARBERT"
 
 # Maximum sequence length for tokenization, set after analyzing the actual
-# tokenized length distribution of the cleaned corpus 
-MAX_SEQ_LENGTH = 40
+# tokenized length distribution of the cleaned corpus (see src/eda.py).
+MAX_SEQ_LENGTH = None
 
 # Train / validation / test split ratios (must sum to 1.0)
 TRAIN_RATIO = 0.80
@@ -59,8 +61,7 @@ try:
 except ImportError:
     IS_COLAB = False
 
-# On Colab, model outputs go to a Drive folder so they survive session
-# disconnects. Locally, they go to the project's own models/ folder.
+
 if IS_COLAB:
     COLAB_DRIVE_PROJECT_DIR = Path("/content/drive/MyDrive/arabic-hate-speech-mlops")
     MODELS_DIR = COLAB_DRIVE_PROJECT_DIR / "models"
@@ -70,6 +71,11 @@ else:
 CHECKPOINTS_DIR = MODELS_DIR / "checkpoints"
 BEST_MODEL_DIR = MODELS_DIR / "best_model"
 TRAIN_REPORT_DIR = REPORTS_DIR / "train"
+
+MODEL_VARIANTS = {
+    "full_finetune": MODELS_DIR / "best_model_full_finetune",
+    "lora": MODELS_DIR / "best_model_lora",
+}
 
 # ---------------------------------------------------------------------------
 # Training hyperparameters (defaults; overridden during hyperparameter search)
@@ -101,5 +107,6 @@ WANDB_PROJECT = "arabic-hate-speech-marbert"
 
 # Create the project directory structure if it doesn't already exist.
 for _dir in (RAW_DIR, PROCESSED_DIR, SPLITS_DIR, EDA_REPORT_DIR,
-             MODELS_DIR, CHECKPOINTS_DIR, BEST_MODEL_DIR, TRAIN_REPORT_DIR):
+             MODELS_DIR, CHECKPOINTS_DIR, BEST_MODEL_DIR, TRAIN_REPORT_DIR,
+             EVAL_REPORT_DIR):
     _dir.mkdir(parents=True, exist_ok=True)
