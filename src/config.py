@@ -43,9 +43,8 @@ LHSAB_LABEL_MAP = {"hate": 1, "abusive": 1, "normal": 0}
 # Model
 MODEL_NAME = "UBC-NLP/MARBERT"
 
-# Maximum sequence length for tokenization, set after analyzing the actual
-# tokenized length distribution of the cleaned corpus (see src/eda.py).
-MAX_SEQ_LENGTH = None
+
+MAX_SEQ_LENGTH = 40
 
 # Train / validation / test split ratios (must sum to 1.0)
 TRAIN_RATIO = 0.80
