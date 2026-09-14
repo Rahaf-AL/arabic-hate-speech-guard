@@ -1,0 +1,9 @@
+data/
+models/
+reports/
+notebooks/
+.git/
+.gitignore
+__pycache__/
+*.pyc
+.venv/

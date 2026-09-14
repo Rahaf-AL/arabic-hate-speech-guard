@@ -27,9 +27,7 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 def load_model(model_dir):
-    """Loads a model either from a local directory or a Hugging Face Hub
-    repo id (e.g. "username/arabic-hate-speech-marbert-lora"), and detects
-    whether it is a LoRA adapter or a full fine-tune either way."""
+    
     model_dir = str(model_dir)
 
     from peft import PeftConfig, PeftModel

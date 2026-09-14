@@ -1,10 +1,7 @@
 """
 Exploratory Data Analysis
 
-Runs lightweight statistical and lexical analysis on the merged dataset and
-saves the resulting plots under reports/eda/. This script only produces
-figures and console/log output — it does not generate the written EDA
-report; that is a separate step once the results here have been reviewed.
+Runs lightweight statistical and lexical analysis on the merged dataset
 """
 # %%
 import logging
