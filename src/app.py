@@ -14,7 +14,7 @@ import torch
 sys.path.append(str(Path(__file__).resolve().parent))
 import config  # noqa: E402
 from evaluate import load_model  # noqa: E402
-from preprocess import clean_text  # noqa: E402
+from preprocessing  import clean_text  # noqa: E402
 from transformers import AutoTokenizer  # noqa: E402
 
 EXAMPLES = [
