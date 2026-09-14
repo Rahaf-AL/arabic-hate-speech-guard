@@ -1,0 +1,2 @@
+,test_loss,test_model_preparation_time,test_accuracy,test_precision,test_recall,test_f1,test_f1_not_hate,test_f1_hate,test_runtime,test_samples_per_second,test_steps_per_second
+lora,0.3926214575767517,0.0028,0.8276209677419355,0.8271979759645793,0.8268885020404668,0.8270296726827776,0.816916488222698,0.8371428571428572,4.6876,423.247,26.453

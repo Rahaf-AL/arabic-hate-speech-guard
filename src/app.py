@@ -1,8 +1,7 @@
 """
 Inference App
 
-Gradio interface for the Arabic hate speech classifier. Loads a trained
-model (full fine-tune or LoRA, auto-detected), applies the same cleaning
+Gradio interface for the Arabic hate speech classifier. applies the same cleaning
 used during training, and returns a hate/not_hate probability for any
 Arabic text typed in.
 """

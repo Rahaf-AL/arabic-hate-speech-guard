@@ -1,10 +1,5 @@
 """
 Model Evaluation
-
-Evaluates one or more saved model variants (full fine-tune, LoRA) on
-the held-out test set, the split none of them saw during training or best-
-checkpoint selection. Saves a confusion matrix per model and a comparison
-table across all evaluated variants.
 """
 import argparse
 import json
@@ -28,19 +23,28 @@ logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Model loading (handles both full fine-tunes and LoRA adapters)
+# Model loading 
 # ---------------------------------------------------------------------------
 
-def load_model(model_dir: Path):
-    model_dir = Path(model_dir)
+def load_model(model_dir):
+    """Loads a model either from a local directory or a Hugging Face Hub
+    repo id (e.g. "username/arabic-hate-speech-marbert-lora"), and detects
+    whether it is a LoRA adapter or a full fine-tune either way."""
+    model_dir = str(model_dir)
 
-    if (model_dir / "adapter_config.json").exists():
-        from peft import PeftModel
+    from peft import PeftConfig, PeftModel
+    try:
+        PeftConfig.from_pretrained(model_dir)
+        is_lora_adapter = True
+    except Exception:
+        is_lora_adapter = False
+
+    if is_lora_adapter:
         base_model = AutoModelForSequenceClassification.from_pretrained(config.MODEL_NAME, num_labels=2)
-        model = PeftModel.from_pretrained(base_model, str(model_dir))
+        model = PeftModel.from_pretrained(base_model, model_dir)
         model = model.merge_and_unload()
     else:
-        model = AutoModelForSequenceClassification.from_pretrained(str(model_dir), num_labels=2)
+        model = AutoModelForSequenceClassification.from_pretrained(model_dir, num_labels=2)
 
     return model
 
