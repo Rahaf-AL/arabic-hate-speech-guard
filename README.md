@@ -64,7 +64,7 @@ Loads one or more trained model variants (full fine-tune, LoRA, HPO-tuned) and e
 - A confusion matrix plot
 - A `comparison.csv` ranking all evaluated variants by test F1
 
-### 6. Inference & demo app (`src/inference.py`, `src/app.py`)
+### 5. Inference & demo app (`src/inference.py`, `src/app.py`)
 
 `inference.py` is the shared prediction logic: it loads the tokenizer and model (auto-detecting whether the model directory is a LoRA adapter or a full fine-tune), cleans the input text with the same preprocessing used during training, and returns a probability for each class.
 
