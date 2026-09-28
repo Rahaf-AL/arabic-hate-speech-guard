@@ -12,6 +12,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
+# CPU-only torch build first: the deployment server (AWS EC2 t2.micro) has
+# no GPU, and the CPU wheel is a fraction of the size of the default GPU
+# build. requirements.txt lists "torch" with no version pin, so once this
+# is satisfied, the next line skips reinstalling it.
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
